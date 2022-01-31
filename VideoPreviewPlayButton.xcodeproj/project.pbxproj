@@ -13,6 +13,7 @@
 		8DBB313B27A809AF008F3756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB313927A809AF008F3756 /* Main.storyboard */; };
 		8DBB313D27A809AF008F3756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB313C27A809AF008F3756 /* Assets.xcassets */; };
 		8DBB314027A809AF008F3756 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB313E27A809AF008F3756 /* LaunchScreen.storyboard */; };
+		8DBB314827A809CD008F3756 /* VideoPreviewPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB314727A809CD008F3756 /* VideoPreviewPlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8DBB313C27A809AF008F3756 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DBB313F27A809AF008F3756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DBB314127A809AF008F3756 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DBB314727A809CD008F3756 /* VideoPreviewPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewPlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				8DBB313C27A809AF008F3756 /* Assets.xcassets */,
 				8DBB313E27A809AF008F3756 /* LaunchScreen.storyboard */,
 				8DBB314127A809AF008F3756 /* Info.plist */,
+				8DBB314727A809CD008F3756 /* VideoPreviewPlayButton.swift */,
 			);
 			path = VideoPreviewPlayButton;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				8DBB313827A809AF008F3756 /* ViewController.swift in Sources */,
 				8DBB313427A809AF008F3756 /* AppDelegate.swift in Sources */,
+				8DBB314827A809CD008F3756 /* VideoPreviewPlayButton.swift in Sources */,
 				8DBB313627A809AF008F3756 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
