@@ -79,7 +79,6 @@ class VideoPreviewPlayButton: UIView, CAAnimationDelegate {
                 strokeLayer?.strokeEnd = downloadProgress
                 if downloadProgress >= 1 {
                     currentState = .play
-                    timer?.invalidate()
                     removeStroke()
                 }
             }
@@ -91,17 +90,23 @@ class VideoPreviewPlayButton: UIView, CAAnimationDelegate {
             imageView.image = currentState.image(imageView.bounds.width * 0.6)
             imageView.tintColor = currentState.tintColor()
             imageView.backgroundColor = currentState.backgroundColor()
+            switch currentState {
+            case .download:
+                removeStroke()
+            case .downloading:
+                addStroke()
+            case .play:
+                removeStroke()
+            }
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-//        setup()
     }
     
     override func layoutSubviews() {
@@ -129,7 +134,7 @@ class VideoPreviewPlayButton: UIView, CAAnimationDelegate {
         addGestureRecognizer(gesture)
     }
     
-    func addStroke() {
+    private func addStroke() {
         downloadProgress = 0
         strokeLayer = CAShapeLayer()
         strokeLayer.removeFromSuperlayer()
@@ -139,42 +144,36 @@ class VideoPreviewPlayButton: UIView, CAAnimationDelegate {
                                       endAngle: 1.5 * CGFloat.pi, clockwise: true)
         strokeLayer.path = circlePath.cgPath
         strokeLayer.strokeColor = UIColor.label.cgColor
-        strokeLayer.lineWidth = 5
+        strokeLayer.lineWidth = 6
         strokeLayer.fillColor = UIColor.clear.cgColor
         strokeLayer.lineCap = CAShapeLayerLineCap.round
         strokeLayer.strokeEnd = 0
         layer.addSublayer(strokeLayer)
     }
     
-    func removeStroke() {
+    private func removeStroke() {
         strokeLayer?.strokeEnd = 0
         strokeLayer?.removeFromSuperlayer()
     }
-    
-    var timer: Timer?
     
     @objc
     private func handleTap(_ gesture: UITapGestureRecognizer) {
         switch currentState {
         case .download:
-            addStroke()
             currentState = .downloading
             delegate?.didStartDownloading(self)
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.downloadProgress += 0.1
-            }
         case .downloading:
-            removeStroke()
             currentState = .download
             delegate?.didCancelDownloading(self)
-            strokeLayer.removeAllAnimations()
         case .play:
-            removeStroke()
             delegate?.didTapPlayButton(self)
+            let animation1 = CABasicAnimation(keyPath: "transform.scale")
+            animation1.toValue = 1.05
+            animation1.autoreverses = true
+            animation1.duration = 0.1
+            animation1.repeatCount = 1
+            animation1.isRemovedOnCompletion = true
+            layer.add(animation1, forKey: "transform")
         }
     }
 }
